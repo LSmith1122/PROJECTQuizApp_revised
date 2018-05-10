@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context="com.example.android.projectquizapp.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/instructions"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <!-- MAIN CONTENT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="12"
+            android:background="@drawable/layout_bg"
+            android:orientation="vertical">
+
+                <!-- Parent Group for com.example.android.projectquizapp.Question Groups -->
+            <ListView
+                android:id="@+id/parent_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/main_parent_view_group"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--&lt;!&ndash; com.example.android.projectquizapp.Question 1 &ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--&lt;!&ndash; com.example.android.projectquizapp.Question Text View &ndash;&gt;-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/question_1"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:fontFamily="sans-serif-black"-->
+                            <!--android:maxLines="8"-->
+                            <!--android:text="@string/question_1"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="28sp" />-->
+
+                        <!--&lt;!&ndash; Options View Group&ndash;&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/content_view_group_1"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:orientation="horizontal">-->
+
+                            <!--<RadioGroup-->
+                                <!--android:layout_width="0dp"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:orientation="vertical">-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_1_option_1"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 1"-->
+                                    <!--android:text="@string/question_1_1"-->
+                                    <!--android:textColor="#000000" />-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_1_option_2"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 1"-->
+                                    <!--android:text="@string/question_1_2"-->
+                                    <!--android:textColor="#000000" />-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_1_option_3"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 1"-->
+                                    <!--android:text="@string/question_1_3"-->
+                                    <!--android:textColor="#000000" />-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_1_option_4"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 1"-->
+                                    <!--android:text="@string/question_1_4"-->
+                                    <!--android:textColor="#000000" />-->
+
+                            <!--</RadioGroup>-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; Separator View Group&ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:baselineAligned="false"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_margin="16dp"-->
+                            <!--android:layout_weight="8"-->
+                            <!--android:background="@android:color/darker_gray"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; com.example.android.projectquizapp.Question 2 &ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--&lt;!&ndash; com.example.android.projectquizapp.Question Text View &ndash;&gt;-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/question_2"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:fontFamily="sans-serif-black"-->
+                            <!--android:maxLines="8"-->
+                            <!--android:text="@string/question_2"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="28sp" />-->
+
+                        <!--&lt;!&ndash; Options View Group&ndash;&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/content_view_group_2"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:layout_weight="6"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_2_option_1"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 2"-->
+                                <!--android:text="@string/question_2_1"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_2_option_2"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 2"-->
+                                <!--android:text="@string/question_2_2"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_2_option_3"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 2"-->
+                                <!--android:text="@string/question_2_3"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_2_option_4"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 2"-->
+                                <!--android:text="@string/question_2_4"-->
+                                <!--android:textColor="#000000" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; Separator View Group&ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:baselineAligned="false"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_margin="16dp"-->
+                            <!--android:layout_weight="8"-->
+                            <!--android:background="@android:color/darker_gray"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; com.example.android.projectquizapp.Question 3 &ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--&lt;!&ndash; com.example.android.projectquizapp.Question Text View &ndash;&gt;-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/question_3"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:fontFamily="sans-serif-black"-->
+                            <!--android:maxLines="8"-->
+                            <!--android:text="@string/question_3"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="28sp" />-->
+
+                        <!--&lt;!&ndash; Options View Group&ndash;&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/content_view_group_3"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:layout_weight="6"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<RadioGroup-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="16dp"-->
+                                <!--android:orientation="vertical">-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_3_option_1"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 3"-->
+                                    <!--android:text="@string/question_3_1"-->
+                                    <!--android:textColor="#000000" />-->
+
+                                <!--<RadioButton-->
+                                    <!--android:id="@+id/question_3_option_2"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="8dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:onClick="onButtonClicked"-->
+                                    <!--android:tag="question 3"-->
+                                    <!--android:text="@string/question_3_2"-->
+                                    <!--android:textColor="#000000" />-->
+
+                            <!--</RadioGroup>-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; Separator View Group&ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:baselineAligned="false"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_margin="16dp"-->
+                            <!--android:layout_weight="8"-->
+                            <!--android:background="@android:color/darker_gray"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; com.example.android.projectquizapp.Question 4 &ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--&lt;!&ndash; com.example.android.projectquizapp.Question Text View &ndash;&gt;-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/question_4"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:fontFamily="sans-serif-black"-->
+                            <!--android:maxLines="8"-->
+                            <!--android:text="@string/question_4"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="28sp" />-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="150dp"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:layout_marginVertical="8dp"-->
+                            <!--android:paddingHorizontal="16dp"-->
+                            <!--android:scaleType="fitCenter"-->
+                            <!--android:src="@drawable/cameras" />-->
+
+                        <!--&lt;!&ndash; Options View Group&ndash;&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/content_view_group_4"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:layout_weight="6"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_4_option_1"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 4"-->
+                                <!--android:text="@string/question_4_1"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_4_option_2"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 4"-->
+                                <!--android:text="@string/question_4_2"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_4_option_3"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 4"-->
+                                <!--android:text="@string/question_4_3"-->
+                                <!--android:textColor="#000000" />-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/question_4_option_4"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="8dp"-->
+                                <!--android:layout_marginLeft="16dp"-->
+                                <!--android:layout_marginRight="16dp"-->
+                                <!--android:onClick="onButtonClicked"-->
+                                <!--android:tag="question 4"-->
+                                <!--android:text="@string/question_4_4"-->
+                                <!--android:textColor="#000000" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; Separator View Group&ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:baselineAligned="false"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_margin="16dp"-->
+                            <!--android:layout_weight="8"-->
+                            <!--android:background="@android:color/darker_gray"-->
+                            <!--android:orientation="horizontal" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:orientation="horizontal" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--&lt;!&ndash; com.example.android.projectquizapp.Question 5 &ndash;&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--&lt;!&ndash; com.example.android.projectquizapp.Question Text View &ndash;&gt;-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/question_5"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginTop="16dp"-->
+                            <!--android:fontFamily="sans-serif-black"-->
+                            <!--android:maxLines="8"-->
+                            <!--android:text="@string/question_5"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="28sp" />-->
+
+                        <!--&lt;!&ndash; Options View Group&ndash;&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/content_view_group_5"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:layout_marginTop="8dp"-->
+                            <!--android:layout_weight="6"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal">-->
+
+                                <!--<TextView-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="8dp"-->
+                                    <!--android:text="@string/question_5_1_1"-->
+                                    <!--android:textColor="@android:color/black" />-->
+
+                                <!--<EditText-->
+                                    <!--android:id="@+id/question_5_answer_1"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:digits="@string/allowed_characters"-->
+                                    <!--android:hint="@string/question_5_1"-->
+                                    <!--android:inputType="textShortMessage"-->
+                                    <!--android:maxLength="20"-->
+                                    <!--android:maxLines="1"-->
+                                    <!--android:tag="question 5"/>-->
+
+                            <!--</LinearLayout>-->
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal">-->
+
+                                <!--<TextView-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="8dp"-->
+                                    <!--android:text="@string/question_5_2_1"-->
+                                    <!--android:textColor="@android:color/black" />-->
+
+                                <!--<EditText-->
+                                    <!--android:id="@+id/question_5_answer_2"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:digits="@string/allowed_characters"-->
+                                    <!--android:hint="@string/question_5_1"-->
+                                    <!--android:inputType=""-->
+                                    <!--android:maxLength="20"-->
+                                    <!--android:maxLines="1"-->
+                                    <!--android:tag="question 5"/>-->
+
+                            <!--</LinearLayout>-->
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal">-->
+
+                                <!--<TextView-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="8dp"-->
+                                    <!--android:text="@string/question_5_3_1"-->
+                                    <!--android:textColor="@android:color/black" />-->
+
+                                <!--<EditText-->
+                                    <!--android:id="@+id/question_5_answer_3"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginBottom="16dp"-->
+                                    <!--android:layout_marginLeft="16dp"-->
+                                    <!--android:layout_marginRight="16dp"-->
+                                    <!--android:digits="@string/allowed_characters"-->
+                                    <!--android:hint="@string/question_5_1"-->
+                                    <!--android:inputType="textShortMessage"-->
+                                    <!--android:maxLength="20"-->
+                                    <!--android:maxLines="1"-->
+                                    <!--android:tag="question 5"/>-->
+
+                            <!--</LinearLayout>-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <!-- SUBMIT BUTTON -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:onClick="checkResponse"
+                android:text="Submit"
+                android:textColor="@android:color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
