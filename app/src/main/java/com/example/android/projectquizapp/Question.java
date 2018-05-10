@@ -5,14 +5,17 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Question {
-    public int tagNumber;
-    public String questionString, answerLongString, correctAnswerLongString, answerType;
-    ArrayList<String> answerList = new ArrayList<String>();
-    ArrayList<String> correctAnswerList = new ArrayList<String>();
+    private int tagNumber;
+    private String imageResourceID;
+    private Boolean imageAvailable;
+    private String questionString, answerLongString, correctAnswerLongString, answerType;
+    private ArrayList<String> answerList = new ArrayList<String>();
+    private ArrayList<String> correctAnswerList = new ArrayList<String>();
 
     Question(int tag, String questionStringList, String answerSelectionType) {
         tagNumber = tag;
         answerType = answerSelectionType;
+        imageAvailable = false;
 
         compileStrings(questionStringList);
         String[] correctAnswerSimpleList = correctAnswerLongString.split(", ");
@@ -21,9 +24,18 @@ public class Question {
         }
     }
 
-//    Question(String tag, String question, String answer, String correctAnswer, String answerSelectionType, int imgResourceID) {
-//
-//    }
+    Question(int tag, String questionStringList, String answerSelectionType, String imageResourcePath) {
+        tagNumber = tag;
+        answerType = answerSelectionType;
+        imageAvailable = true;
+        imageResourceID = imageResourcePath;
+
+        compileStrings(questionStringList);
+        String[] correctAnswerSimpleList = correctAnswerLongString.split(", ");
+        for (String stringNuggets : correctAnswerSimpleList) {
+            correctAnswerList.add(stringNuggets);
+        }
+    }
 
     public int getTag() { return tagNumber; }
 
@@ -34,7 +46,6 @@ public class Question {
     public String getQuestion() { return questionString; }
 
     public String getAnswer(int position) {
-        Log.i("xxxxOOOOxxxx Error: ", "Position - " + answerList.toString());
         return answerList.get(position);
     }
 
@@ -64,4 +75,9 @@ public class Question {
     public int getAnswerSize() {
         return answerList.size();
     }
+
+    public Boolean isImageVisible() { return imageAvailable; }
+
+    public String getImageResourceID() {
+        return imageResourceID; }
 }

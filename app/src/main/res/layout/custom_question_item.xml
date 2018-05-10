@@ -8,15 +8,13 @@
 
         <TextView
             android:id="@+id/question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-black"
-            android:maxLines="8"
-            android:textColor="#000000"
-            android:textSize="28sp" />
+            style="@style/questionTextView"
+            android:fontFamily="sans-serif-black"/>
+
+        <ImageView
+            android:id="@+id/question_image"
+            style="@style/questionImageView"
+            android:src="@drawable/cameras"/>
 
         <!-- Options View Group-->
         <LinearLayout
@@ -28,109 +26,51 @@
 
             <RadioGroup
                 android:id="@+id/radio_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                style="@style/buttonGroupStyle">
 
                 <RadioButton
                     android:id="@+id/question_option_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <RadioButton
                     android:id="@+id/question_option_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <RadioButton
                     android:id="@+id/question_option_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <RadioButton
                     android:id="@+id/question_option_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
             </RadioGroup>
 
             <LinearLayout
                 android:id="@+id/checkbox_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                style="@style/buttonGroupStyle">
 
                 <CheckBox
                     android:id="@+id/checkbox_question_option_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <CheckBox
                     android:id="@+id/checkbox_question_option_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <CheckBox
                     android:id="@+id/checkbox_question_option_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle" />
 
                 <CheckBox
                     android:id="@+id/checkbox_question_option_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:onClick="onButtonClicked"
-                    android:tag="question 1"
-                    android:textColor="#000000" />
+                    style="@style/buttonStyle"/>
 
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/textbox"
+                style="@style/editText"/>
 
         </LinearLayout>
 

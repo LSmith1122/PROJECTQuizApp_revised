@@ -4,6 +4,7 @@
         <item name="question2">What affects the amount of light that is captured in an image? \n(select all that apply) > Shutter Speed, Aperture, Shutter Release, White Balance > Shutter Speed, Aperture</item>
         <item name="question3">What is the term most frequently used when a photographer measures and adjusts a camera\'s light exposure? > Stops, Points > Stops</item>
         <item name="question4">List the types of cameras in order from LEFT to RIGHT? \n(select all that apply) > DSLR/"Compact/"Compact, DSLR/"Mirrorless/"Compact, Point and Shoot/"Mirrorless/"DSLR, None of the above > None of the above</item>
+        <item name="question5">What does the \"SLR\" stand for in DSLR? > null > single lens reflex</item>
         <!--<string name="question5">What does the \"SLR\" stand for in DSLR?</string>-->
     </string-array>
     <string name="app_name">PROJECT: Quiz App</string>

@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         questionList.add(new Question(1, questionResourceList[0], "RadioButton"));
         questionList.add(new Question(2, questionResourceList[1], "CheckBox"));
         questionList.add(new Question(3, questionResourceList[2], "RadioButton"));
-        questionList.add(new Question(4, questionResourceList[3], "CheckBox"));
+        questionList.add(new Question(4, questionResourceList[3], "CheckBox", "cameras"));
+        questionList.add(new Question(5, questionResourceList[4], "Text"));
 
         QuestionAdapter adapter = new QuestionAdapter(this, questionList);
         ListView listView = (ListView) findViewById(R.id.parent_group);
