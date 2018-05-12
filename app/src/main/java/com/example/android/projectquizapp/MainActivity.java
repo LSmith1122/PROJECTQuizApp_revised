@@ -18,13 +18,16 @@ public class MainActivity extends AppCompatActivity {
     //Type of Questions to populate
     String testType;
     // Content Variables
-    boolean q1, q2, q3, q4, q5 = false;         // determines whether or not a question has been answered
+    static boolean q1, q2, q3, q4, q5 = false;         // determines whether or not a question has been answered
     boolean answerCorrectQ1, answerCorrectQ2, answerCorrectQ3, answerCorrectQ4, answerCorrectQ5, answerCorrectQ5_A1, answerCorrectQ5_A2, answerCorrectQ5_A3;        // determines whether the answer chosen for its respective question is correct
     boolean areAllQuestionsAnswered = false;        // determines if all questions have been answered - not necessarily correct
     int q2_a2_stat, q2_a1_stat = 0;     // current state of whether both 'correct' options are selected for com.example.android.projectquizapp.Question 2
     int q1_checkedOptionsQuantity, q2_checkedOptionsQuantity, q3_checkedOptionsQuantity, q4_checkedOptionsQuantity, photography_score1, photography_score2, photography_score3 = 0;     // quantity of objects checked within its respective group
     String q_string;        // com.example.android.projectquizapp.Question 5's TextBox text (String)
     int maxScore = 5;
+
+    static ArrayList<String> selectedAnswerList = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +39,25 @@ public class MainActivity extends AppCompatActivity {
     private final void populateActivity() {
         ArrayList<Question> questionList = new ArrayList<Question>();
         String[] questionResourceList = getResources().getStringArray(R.array.photography_questions);
-        questionList.add(new Question(1, questionResourceList[0], "RadioButton"));
-        questionList.add(new Question(2, questionResourceList[1], "CheckBox"));
-        questionList.add(new Question(3, questionResourceList[2], "RadioButton"));
-        questionList.add(new Question(4, questionResourceList[3], "CheckBox", "cameras"));
-        questionList.add(new Question(5, questionResourceList[4], "Text"));
+
+        Question question1 = new Question(1, questionResourceList[0], "RadioButton");
+        Question question2 = new Question(2, questionResourceList[1], "CheckBox");
+        Question question3 = new Question(3, questionResourceList[2], "RadioButton");
+        Question question4 = new Question(4, questionResourceList[3], "CheckBox", "cameras");
+        Question question5 = new Question(5, questionResourceList[4], "Text");
+
+        questionList.add(question1);
+        questionList.add(question2);
+        questionList.add(question3);
+        questionList.add(question4);
+        questionList.add(question5);
 
         QuestionAdapter adapter = new QuestionAdapter(this, questionList);
         ListView listView = (ListView) findViewById(R.id.parent_group);
         listView.setAdapter(adapter);
     }
+
+
 
 //    public void checkResponse(View view) {
 //        if (areAllQuestionsAnswered()) {         // if all questions answered...

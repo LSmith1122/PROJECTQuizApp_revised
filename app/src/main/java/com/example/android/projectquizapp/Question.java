@@ -11,6 +11,7 @@ public class Question {
     private String questionString, answerLongString, correctAnswerLongString, answerType;
     private ArrayList<String> answerList = new ArrayList<String>();
     private ArrayList<String> correctAnswerList = new ArrayList<String>();
+    private ArrayList<String> selectedAnswerList = new ArrayList<String>();
 
     Question(int tag, String questionStringList, String answerSelectionType) {
         tagNumber = tag;
