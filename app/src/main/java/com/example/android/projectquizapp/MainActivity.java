@@ -22,11 +22,15 @@ public class MainActivity extends AppCompatActivity {
     boolean answerCorrectQ1, answerCorrectQ2, answerCorrectQ3, answerCorrectQ4, answerCorrectQ5, answerCorrectQ5_A1, answerCorrectQ5_A2, answerCorrectQ5_A3;        // determines whether the answer chosen for its respective question is correct
     boolean areAllQuestionsAnswered = false;        // determines if all questions have been answered - not necessarily correct
     int q2_a2_stat, q2_a1_stat = 0;     // current state of whether both 'correct' options are selected for com.example.android.projectquizapp.Question 2
-    int q1_checkedOptionsQuantity, q2_checkedOptionsQuantity, q3_checkedOptionsQuantity, q4_checkedOptionsQuantity, photography_score1, photography_score2, photography_score3 = 0;     // quantity of objects checked within its respective group
+    static int q1_checkedOptionsQuantity, q2_checkedOptionsQuantity, q3_checkedOptionsQuantity, q4_checkedOptionsQuantity, q5_checkedOptionsQuantity, photography_score1, photography_score2, photography_score3 = 0;     // quantity of objects checked within its respective group
     String q_string;        // com.example.android.projectquizapp.Question 5's TextBox text (String)
     int maxScore = 5;
 
-    static ArrayList<String> selectedAnswerList = new ArrayList<String>();
+    static ArrayList<String> answerList_q1 = new ArrayList<String>();
+    static ArrayList<String> answerList_q2 = new ArrayList<String>();
+    static ArrayList<String> answerList_q3 = new ArrayList<String>();
+    static ArrayList<String> answerList_q4 = new ArrayList<String>();
+    static ArrayList<String> answerList_q5 = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//    public void checkResponse(View view) {
+    public void checkResponse(View view) {
+        if (q1 && q2 && q3 && q4) {
 //        if (areAllQuestionsAnswered()) {         // if all questions answered...
 //            String finalScore = String.valueOf(tallyAnswers());
 //            Intent intent = new Intent(this, FinalScore_Activity.class);
@@ -67,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
 //            bundle.putString("final score", finalScore);
 //            intent.putExtras(bundle);
 //            startActivity(intent);
-//        } else {
-//            Toast.makeText(getApplicationContext(), "Please answer all questions", Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NO REMOVE
-//        }
-//    }
+        } else {
+            Toast.makeText(getApplicationContext(), "Please answer all questions", Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
+        }
+    }
 //    public boolean areAllQuestionsAnswered() {
 //        if (q1 && q2 && q3 && q4) {
 //            EditText textboxS = findViewById(R.id.question_5_answer_1);
