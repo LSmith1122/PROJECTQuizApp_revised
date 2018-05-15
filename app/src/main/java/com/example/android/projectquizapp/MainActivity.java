@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     String q_string;        // com.example.android.projectquizapp.Question 5's TextBox text (String)
     int maxScore = 5;
 
+    static ArrayList<Boolean> booleanArrayList = new ArrayList<Boolean>();
+    static ArrayList<EditText> editTextArrayList = new ArrayList<EditText>();
     static ArrayList<String> answerList_q1 = new ArrayList<String>();
     static ArrayList<String> answerList_q2 = new ArrayList<String>();
     static ArrayList<String> answerList_q3 = new ArrayList<String>();
@@ -36,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // This is in place to keep each variable in chronological order and reference them accordingly
+        booleanArrayList.add(q1);
+        booleanArrayList.add(q2);
+        booleanArrayList.add(q3);
+        booleanArrayList.add(q4);
+        booleanArrayList.add(q5);
 
         populateActivity();
     }
@@ -74,6 +83,20 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Please answer all questions", Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
+        }
+        for (int i = 0; i < editTextArrayList.size(); i++) {
+            EditText object = editTextArrayList.get(i);
+            checkEditTextStatus(object);
+        }
+    }
+
+    private void checkEditTextStatus(EditText object) {
+        boolean status = false;
+        for (int i = 0; i < booleanArrayList.size(); i++) {
+            int alignedIndexNumber = Integer.valueOf(object.getTag().toString()) - 1;
+            if (!object.getText().equals("") && !object.getText().equals(null)) {
+                booleanArrayList.set(alignedIndexNumber, true);
+            }
         }
     }
 //    public boolean areAllQuestionsAnswered() {

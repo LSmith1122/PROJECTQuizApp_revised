@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/question_image"
             style="@style/questionImageView"
-            android:src="@drawable/example"/>
+            android:src="@drawable/cameras"/>
 
         <!-- Options View Group-->
         <LinearLayout

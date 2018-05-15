@@ -134,6 +134,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             EditText textBox = (EditText) listItemView.findViewById(R.id.textbox);
             textBox.setVisibility(View.VISIBLE);
             textBox.setTag(tag);
+            MainActivity.editTextArrayList.add(textBox);
         }
             return listItemView;
     }
