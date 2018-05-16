@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     //Type of Questions to populate
     String testType;
     // Content Variables
-    static boolean q1, q2, q3, q4, q5, allEditTextsAnswered = false;         // determines whether or not a question has been answered
+    static boolean q1, q2, q3, q4, q5, allEditTextsAnswered, allButtonsAnswered = false;         // determines whether or not a question has been answered
     boolean answerCorrectQ1, answerCorrectQ2, answerCorrectQ3, answerCorrectQ4, answerCorrectQ5, answerCorrectQ5_A1, answerCorrectQ5_A2, answerCorrectQ5_A3;        // determines whether the answer chosen for its respective question is correct
     boolean areAllQuestionsAnswered = false;        // determines if all questions have been answered - not necessarily correct
     int q2_a2_stat, q2_a1_stat = 0;     // current state of whether both 'correct' options are selected for com.example.android.projectquizapp.Question 2
@@ -75,17 +75,39 @@ public class MainActivity extends AppCompatActivity {
     public void checkResponse(View view) {
         answeredEditTextCounter = 0;
         int maxEditTextAmount = 0;
+        int buttonsAnswered = 0;
+        int maxButtonAmount = 0;
         checkButtonAnswers();
         checkEditTextAnswers();
         for (int i = 0; i < questionList.size(); i++) {
-            if (questionList.get(i).getClass().getName().contains("Text")) {
+            Question question = questionList.get(i);
+            if (question.getClass().getName().contains("Text")) {
                 maxEditTextAmount++;
+            } else {
+                maxButtonAmount++;
+                if (question.isQuestionAnswered()) {
+                    buttonsAnswered++;
+                }
             }
         }
         if (answeredEditTextCounter == maxEditTextAmount) {
             allEditTextsAnswered = true;
+        } else {
+            allEditTextsAnswered = false;
         }
-        if (q1 && q2 && q3 && q4 && allEditTextsAnswered) {
+        if (buttonsAnswered == maxButtonAmount) {
+            allButtonsAnswered = true;
+        } else {
+            allButtonsAnswered = false;
+        }
+
+        if (allButtonsAnswered && allEditTextsAnswered) {
+            String finalScore = String.valueOf(tallyAnswers());
+            Intent intent = new Intent(this, FinalScore_Activity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("final score", finalScore);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
 //        if (areAllQuestionsAnswered()) {         // if all questions answered...
 //            String finalScore = String.valueOf(tallyAnswers());
@@ -95,8 +117,14 @@ public class MainActivity extends AppCompatActivity {
 //            intent.putExtras(bundle);
 //            startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
+            questionsNotAnswered();
         }
+    }
+
+    public double tallyAnswers() {
+        int maxScore = questionList.size();
+        double finalScore = score / maxScore * 100;
+        return finalScore;
     }
 
     private void checkButtonAnswers() {
@@ -130,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             } else {
-                Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
+                questionsNotAnswered();
                 break;
             }
         }
@@ -147,6 +175,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return status;
+    }
+
+    public void questionsNotAnswered() {
+        Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
     }
 
 //    public boolean areAllQuestionsAnswered() {

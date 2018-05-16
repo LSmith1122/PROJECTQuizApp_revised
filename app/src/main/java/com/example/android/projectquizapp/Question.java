@@ -47,9 +47,7 @@ public class Question {
 
     public int getTag() { return tagNumber; }
 
-    public String getAnswerType() {
-        return answerType;
-    }
+    public String getAnswerType() { return answerType; }
 
     public String getQuestion() { return questionString; }
 
@@ -84,9 +82,7 @@ public class Question {
         }
     }
 
-    public int getAnswerSize() {
-        return answerList.size();
-    }
+    public int getAnswerSize() { return answerList.size(); }
 
     public Boolean isImageVisible() { return imageAvailable; }
 
@@ -131,9 +127,15 @@ public class Question {
 
     public boolean isAnswerCorrect() { return answerInputStatus; }
 
-    public void questionAnswered(Boolean status) { questionAnsweredStatus = status; }
+    public void questionAnswered(Boolean status) { questionAnsweredStatus = status; }   // For EditText Questions only
 
-    public Boolean isQuestionAnswered() { return questionAnsweredStatus; }
+    public Boolean isQuestionAnswered() {
+        boolean status = false;
+        if (getAnswerInputList().size() > 0) {
+            status = true;
+        }
+        return status;
+    }
 
     public int getCheckedOptionsQuantity() { return checkedOptionsQuantity; }
 
