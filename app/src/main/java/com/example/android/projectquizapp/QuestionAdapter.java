@@ -1,9 +1,7 @@
 package com.example.android.projectquizapp;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -24,7 +22,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
     }
 
     View listItemView;
-    Question currentQuestion;
+    Question currentQuestionLayout;
 
     RadioGroup radioGroup;
     RadioButton radioButton1;
@@ -39,27 +37,27 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
     @Override
     public View getView(int position, View convertview, ViewGroup parent) {
         listItemView = convertview;
-        currentQuestion = getItem(position);
-        int tag = currentQuestion.getTag();
+        currentQuestionLayout = getItem(position);
+        int tag = currentQuestionLayout.getTag();
 
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.custom_question_item, parent, false);
             }
 
-        Question currentQuestionRadioButton = currentQuestion;
+        Question currentQuestionRadioButton = currentQuestionLayout;
         TextView questionTextView = (TextView) listItemView.findViewById(R.id.question);
         questionTextView.setText(currentQuestionRadioButton.getQuestion());
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.question_image);
 
-        if (currentQuestion.isImageVisible()) {
+        if (currentQuestionLayout.isImageVisible()) {
             imageView.setVisibility(View.VISIBLE);
-            imageView.setImageResource(listItemView.getResources().getIdentifier(currentQuestion.getImageResourceID(),
+            imageView.setImageResource(listItemView.getResources().getIdentifier(currentQuestionLayout.getImageResourceID(),
                     "drawable", getContext().getPackageName()));
         } else {
             imageView.setVisibility(View.GONE);
         }
 
-        if (currentQuestion.getAnswerType().equals("RadioButton")) {
+        if (currentQuestionLayout.getAnswerType().equals("RadioButton")) {
             ((RadioGroup) listItemView.findViewById(R.id.radio_group)).setVisibility(View.VISIBLE);
             ((LinearLayout) listItemView.findViewById(R.id.checkbox_group)).setVisibility(View.GONE);
             ((EditText) listItemView.findViewById(R.id.textbox)).setVisibility(View.GONE);
@@ -77,23 +75,23 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             radioButton3.setOnClickListener(this);
             radioButton4.setOnClickListener(this);
 
-            radioButton1.setText(currentQuestionRadioButton.getAnswer(0));
-            radioButton2.setText(currentQuestionRadioButton.getAnswer(1));
+            radioButton1.setText(currentQuestionRadioButton.getAnswerAtIndex(0));
+            radioButton2.setText(currentQuestionRadioButton.getAnswerAtIndex(1));
 
             if (currentQuestionRadioButton.getAnswerSize() == 2) {
                 radioButton3.setVisibility(radioButton3.GONE);
                 radioButton4.setVisibility(radioButton4.GONE);
             }
             if (currentQuestionRadioButton.getAnswerSize() == 3) {
-                radioButton3.setText(currentQuestionRadioButton.getAnswer(2));
+                radioButton3.setText(currentQuestionRadioButton.getAnswerAtIndex(2));
                 radioButton4.setVisibility(radioButton4.GONE);
             }
             if (currentQuestionRadioButton.getAnswerSize() == 4){
-                radioButton3.setText(currentQuestionRadioButton.getAnswer(2));
-                radioButton4.setText(currentQuestionRadioButton.getAnswer(3));
+                radioButton3.setText(currentQuestionRadioButton.getAnswerAtIndex(2));
+                radioButton4.setText(currentQuestionRadioButton.getAnswerAtIndex(3));
             }
         }
-        if (currentQuestion.getAnswerType().equals("CheckBox")) {
+        if (currentQuestionLayout.getAnswerType().equals("CheckBox")) {
             ((LinearLayout) listItemView.findViewById(R.id.checkbox_group)).setVisibility(View.VISIBLE);
             ((RadioGroup) listItemView.findViewById(R.id.radio_group)).setVisibility(View.GONE);
             ((EditText) listItemView.findViewById(R.id.textbox)).setVisibility(View.GONE);
@@ -111,23 +109,23 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             checkBox3.setOnClickListener(this);
             checkBox4.setOnClickListener(this);
 
-            checkBox1.setText(currentQuestionRadioButton.getAnswer(0));
-            checkBox2.setText(currentQuestionRadioButton.getAnswer(1));
+            checkBox1.setText(currentQuestionRadioButton.getAnswerAtIndex(0));
+            checkBox2.setText(currentQuestionRadioButton.getAnswerAtIndex(1));
 
             if (currentQuestionRadioButton.getAnswerSize() == 2) {
                 checkBox3.setVisibility(checkBox3.GONE);
                 checkBox4.setVisibility(checkBox4.GONE);
             }
             if (currentQuestionRadioButton.getAnswerSize() == 3) {
-                checkBox3.setText(currentQuestionRadioButton.getAnswer(2));
+                checkBox3.setText(currentQuestionRadioButton.getAnswerAtIndex(2));
                 checkBox4.setVisibility(checkBox4.GONE);
             }
             if (currentQuestionRadioButton.getAnswerSize() == 4){
-                checkBox3.setText(currentQuestionRadioButton.getAnswer(2));
-                checkBox4.setText(currentQuestionRadioButton.getAnswer(3));
+                checkBox3.setText(currentQuestionRadioButton.getAnswerAtIndex(2));
+                checkBox4.setText(currentQuestionRadioButton.getAnswerAtIndex(3));
             }
         }
-        if (currentQuestion.getAnswerType().equals("Text")) {
+        if (currentQuestionLayout.getAnswerType().equals("Text")) {
             ((LinearLayout) listItemView.findViewById(R.id.checkbox_group)).setVisibility(View.GONE);
             ((RadioGroup) listItemView.findViewById(R.id.radio_group)).setVisibility(View.GONE);
 
@@ -168,170 +166,230 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         }
     }
 
-    public int quantityAmount(CheckBox button) {        // Checks the amount of answers that are selected based on the tag of the view supplied...
+    private int quantityAmount(CheckBox button) {        // Checks the amount of answers that are selected based on the tag of the view supplied...
         int amount = 0;
-        switch (Integer.valueOf(button.getTag().toString())) {
-            case 1:
-                amount = MainActivity.q1_checkedOptionsQuantity;
+        int tag = Integer.valueOf(button.getTag().toString());
+        for (int i = 0; i < MainActivity.questionList.size(); i++) {
+            if (tag == MainActivity.questionList.get(i).getTag()) {
+                amount = MainActivity.questionList.get(i).getCheckedOptionsQuantity();
                 break;
-            case 2:
-                amount = MainActivity.q2_checkedOptionsQuantity;
-                break;
-            case 3:
-                amount = MainActivity.q3_checkedOptionsQuantity;
-                break;
-            case 4:
-                amount = MainActivity.q4_checkedOptionsQuantity;
-                break;
-            case 5:
-                amount = MainActivity.q5_checkedOptionsQuantity;
-                break;
-            // Add more cases below as needed...
+            }
         }
+//        switch (Integer.valueOf(button.getTag().toString())) {
+//            case 1:
+//                amount = MainActivity.q1_checkedOptionsQuantity;
+//                break;
+//            case 2:
+//                amount = MainActivity.q2_checkedOptionsQuantity;
+//                break;
+//            case 3:
+//                amount = MainActivity.q3_checkedOptionsQuantity;
+//                break;
+//            case 4:
+//                amount = MainActivity.q4_checkedOptionsQuantity;
+//                break;
+//            case 5:
+//                amount = MainActivity.q5_checkedOptionsQuantity;
+//                break;
+//            // Add more cases below as needed...
+//        }
         return amount;
     }
 
-    public void answeredQuestion(View view, int tagNumber, boolean status) {
-        if (status) {       // If currently focused button is being Checked...
-            switch (tagNumber) {
-                case 1:
-                    MainActivity.q1 = true;
-                    MainActivity.q1_checkedOptionsQuantity++;
+    private void answeredQuestion(View view, int tagNumber, boolean status) {
+        if (status) {
+            for (int i = 0; i < MainActivity.questionList.size(); i++) {
+                int tag = Integer.valueOf(view.getTag().toString());
+                if (tag == MainActivity.questionList.get(i).getTag()) {
+                    Question question = MainActivity.questionList.get(i);
+                    question.questionAnswered(true);
+                    question.checkedOptionsQuantityIncrement();
                     if (view.getClass().toString().contains("RadioButton")) {
-                        if (!MainActivity.answerList_q1.contains(((RadioButton)view).getText())) {
-                            MainActivity.answerList_q1.clear();
-                            MainActivity.answerList_q1.add(((RadioButton)view).getText().toString());
+                        if (!question.getAnswerInputList().contains(((RadioButton)view).getText().toString())) {
+                            question.getAnswerInputList().clear();
+                            question.getAnswerInputList().add(((RadioButton) view).getText().toString());
                         }
                     } else {
-                        MainActivity.answerList_q1.add(((CheckBox)view).getText().toString());
+                        question.getAnswerInputList().add(((CheckBox)view).getText().toString());
                     }
                     break;
-                case 2:
-                    MainActivity.q2 = true;
-                    MainActivity.q2_checkedOptionsQuantity++;
-                    if (view.getClass().toString().contains("RadioButton")) {
-                        if (!MainActivity.answerList_q2.contains(((RadioButton)view).getText())) {
-                            MainActivity.answerList_q2.clear();
-                            MainActivity.answerList_q2.add(((RadioButton)view).getText().toString());
-                        }
-                    } else {
-                        MainActivity.answerList_q2.add(((CheckBox)view).getText().toString());
-                    }
-                    break;
-                case 3:
-                    MainActivity.q3 = true;
-                    MainActivity.q3_checkedOptionsQuantity++;
-                    if (view.getClass().toString().contains("RadioButton")) {
-                        if (!MainActivity.answerList_q3.contains(((RadioButton)view).getText())) {
-                            MainActivity.answerList_q3.clear();
-                            MainActivity.answerList_q3.add(((RadioButton)view).getText().toString());
-                        }
-                    } else {
-                        MainActivity.answerList_q3.add(((CheckBox)view).getText().toString());
-                    }
-                    break;
-                case 4:
-                    MainActivity.q4 = true;
-                    MainActivity.q4_checkedOptionsQuantity++;
-                    if (view.getClass().toString().contains("RadioButton")) {
-                        if (!MainActivity.answerList_q4.contains(((RadioButton)view).getText())) {
-                            MainActivity.answerList_q4.clear();
-                            MainActivity.answerList_q4.add(((RadioButton)view).getText().toString());
-                        }
-                    } else {
-                        MainActivity.answerList_q4.add(((CheckBox)view).getText().toString());
-                    }
-                    break;
-                case 5:
-                    MainActivity.q5 = true;
-                    MainActivity.q5_checkedOptionsQuantity++;
-                    if (view.getClass().toString().contains("RadioButton")) {
-                        if (!MainActivity.answerList_q5.contains(((RadioButton)view).getText())) {
-                            MainActivity.answerList_q5.clear();
-                            MainActivity.answerList_q5.add(((RadioButton)view).getText().toString());
-                        }
-                    } else {
-                        MainActivity.answerList_q5.add(((CheckBox)view).getText().toString());
-                    }
-                    break;
+                }
             }
-        } else {        // If button is unchecked...
-            switch (tagNumber) {
-                case 1:
-                    if (MainActivity.q1_checkedOptionsQuantity >= 1) {
-                        MainActivity.q1_checkedOptionsQuantity--;
+        } else {
+            for (int i = 0; i < MainActivity.questionList.size(); i++) {
+                int tag = Integer.valueOf(view.getTag().toString());
+                if (tag == MainActivity.questionList.get(i).getTag()) {
+                    Question question = MainActivity.questionList.get(i);
+                    if (question.getCheckedOptionsQuantity() >= 1) {
+                        question.checkedOptionsQuantityDecrement();
                         if (view.getClass().toString().contains("RadioButton")) {
-                            MainActivity.answerList_q1.remove(((RadioButton)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q1);
+                            question.getAnswerInputList().remove(((RadioButton)view).getText().toString());
                         } else {
-                            MainActivity.answerList_q1.remove(((CheckBox)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q1);
+                            question.getAnswerInputList().remove(((CheckBox)view).getText().toString());
                         }
                     }
-                    if (MainActivity.q1_checkedOptionsQuantity <= 0) {
-                        MainActivity.q1 = false;
-                    }
-                    break;
-                case 2:
-                    if (MainActivity.q2_checkedOptionsQuantity >= 1) {
-                        MainActivity.q2_checkedOptionsQuantity--;
-                        if (view.getClass().toString().contains("RadioButton")) {
-                            MainActivity.answerList_q2.remove(((RadioButton)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q2);
-                        } else {
-                            MainActivity.answerList_q2.remove(((CheckBox)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q2);
+                    if (question.getCheckedOptionsQuantity() <= 0) {
+                        if (view.getClass().toString().contains("CheckBox")) {
+                            question.questionAnswered(false);
                         }
                     }
-                    if (MainActivity.q2_checkedOptionsQuantity <= 0) {
-                        MainActivity.q2 = false;
-                    }
                     break;
-                case 3:
-                    if (MainActivity.q3_checkedOptionsQuantity >= 1) {
-                        MainActivity.q3_checkedOptionsQuantity--;
-                        if (view.getClass().toString().contains("RadioButton")) {
-                            MainActivity.answerList_q3.remove(((RadioButton)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q3);
-                        } else {
-                            MainActivity.answerList_q3.remove(((CheckBox)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q3);
-                        }
-                    }
-                    if (MainActivity.q3_checkedOptionsQuantity <= 0) {
-                        MainActivity.q3 = false;
-                    }
-                    break;
-                case 4:
-                    if (MainActivity.q4_checkedOptionsQuantity >= 1) {
-                        MainActivity.q4_checkedOptionsQuantity--;
-                        if (view.getClass().toString().contains("RadioButton")) {
-                            MainActivity.answerList_q4.remove(((RadioButton)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q4);
-                        } else {
-                            MainActivity.answerList_q4.remove(((CheckBox)view).getText().toString());
-                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q4);
-                        }
-                    }
-                    if (MainActivity.q4_checkedOptionsQuantity <= 0) {
-                        MainActivity.q4 = false;
-                    }
-                    break;
-                case 5:
-                    if (MainActivity.q5_checkedOptionsQuantity >= 1) {
-                        MainActivity.q5_checkedOptionsQuantity--;
-                        if (view.getClass().toString().contains("RadioButton")) {
-                            MainActivity.answerList_q5.remove(((RadioButton)view).getText().toString());
-                        } else {
-                            MainActivity.answerList_q5.remove(((CheckBox)view).getText().toString());
-                        }
-                    }
-                    if (MainActivity.q5_checkedOptionsQuantity <= 0) {
-                        MainActivity.q5 = false;
-                    }
-                    break;
-                // Add more cases below as needed...
+                }
             }
         }
     }
+
+//    public void answeredQuestion(View view, int tagNumber, boolean status) {
+//        if (status) {       // If currently focused button is being Checked...
+//            switch (tagNumber) {
+//                case 1:
+//                    MainActivity.q1 = true;
+//                    MainActivity.q1_checkedOptionsQuantity++;
+//                    if (view.getClass().toString().contains("RadioButton")) {
+//                        if (!MainActivity.answerList_q1.contains(((RadioButton)view).getText().toString())) {
+//                            MainActivity.answerList_q1.clear();
+//                            MainActivity.answerList_q1.add(((RadioButton)view).getText().toString());
+//                        }
+//                    } else {
+//                        MainActivity.answerList_q1.add(((CheckBox)view).getText().toString());
+//                    }
+//                    break;
+//                case 2:
+//                    MainActivity.q2 = true;
+//                    MainActivity.q2_checkedOptionsQuantity++;
+//                    if (view.getClass().toString().contains("RadioButton")) {
+//                        if (!MainActivity.answerList_q2.contains(((RadioButton)view).getText().toString())) {
+//                            MainActivity.answerList_q2.clear();
+//                            MainActivity.answerList_q2.add(((RadioButton)view).getText().toString());
+//                        }
+//                    } else {
+//                        MainActivity.answerList_q2.add(((CheckBox)view).getText().toString());
+//                    }
+//                    break;
+//                case 3:
+//                    MainActivity.q3 = true;
+//                    MainActivity.q3_checkedOptionsQuantity++;
+//                    if (view.getClass().toString().contains("RadioButton")) {
+//                        if (!MainActivity.answerList_q3.contains(((RadioButton)view).getText().toString())) {
+//                            MainActivity.answerList_q3.clear();
+//                            MainActivity.answerList_q3.add(((RadioButton)view).getText().toString());
+//                        }
+//                    } else {
+//                        MainActivity.answerList_q3.add(((CheckBox)view).getText().toString());
+//                    }
+//                    break;
+//                case 4:
+//                    MainActivity.q4 = true;
+//                    MainActivity.q4_checkedOptionsQuantity++;
+//                    if (view.getClass().toString().contains("RadioButton")) {
+//                        if (!MainActivity.answerList_q4.contains(((RadioButton)view).getText().toString())) {
+//                            MainActivity.answerList_q4.clear();
+//                            MainActivity.answerList_q4.add(((RadioButton)view).getText().toString());
+//                        }
+//                    } else {
+//                        MainActivity.answerList_q4.add(((CheckBox)view).getText().toString());
+//                    }
+//                    break;
+//                case 5:
+//                    MainActivity.q5 = true;
+//                    MainActivity.q5_checkedOptionsQuantity++;
+//                    if (view.getClass().toString().contains("RadioButton")) {
+//                        if (!MainActivity.answerList_q5.contains(((RadioButton)view).getText().toString())) {
+//                            MainActivity.answerList_q5.clear();
+//                            MainActivity.answerList_q5.add(((RadioButton)view).getText().toString());
+//                        }
+//                    } else {
+//                        MainActivity.answerList_q5.add(((CheckBox)view).getText().toString());
+//                    }
+//                    break;
+//            }
+//        } else {        // If button is unchecked...
+//            switch (tagNumber) {
+//                case 1:
+//                    if (MainActivity.q1_checkedOptionsQuantity >= 1) {
+//                        MainActivity.q1_checkedOptionsQuantity--;
+//                        if (view.getClass().toString().contains("RadioButton")) {
+//                            MainActivity.answerList_q1.remove(((RadioButton)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q1);
+//                        } else {
+//                            MainActivity.answerList_q1.remove(((CheckBox)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q1);
+//                        }
+//                    }
+//                    if (MainActivity.q1_checkedOptionsQuantity <= 0) {
+//                        if (view.getClass().toString().contains("CheckBox")) {
+//                            MainActivity.q1 = false;
+//                        }
+//                    }
+//                    break;
+//                case 2:
+//                    if (MainActivity.q2_checkedOptionsQuantity >= 1) {
+//                        MainActivity.q2_checkedOptionsQuantity--;
+//                        if (view.getClass().toString().contains("RadioButton")) {
+//                            MainActivity.answerList_q2.remove(((RadioButton)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q2);
+//                        } else {
+//                            MainActivity.answerList_q2.remove(((CheckBox)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q2);
+//                        }
+//                    }
+//                    if (MainActivity.q2_checkedOptionsQuantity <= 0) {
+//                        if (view.getClass().toString().contains("CheckBox")) {
+//                            MainActivity.q2 = false;
+//                        }
+//                    }
+//                    break;
+//                case 3:
+//                    if (MainActivity.q3_checkedOptionsQuantity >= 1) {
+//                        MainActivity.q3_checkedOptionsQuantity--;
+//                        if (view.getClass().toString().contains("RadioButton")) {
+//                            MainActivity.answerList_q3.remove(((RadioButton)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q3);
+//                        } else {
+//                            MainActivity.answerList_q3.remove(((CheckBox)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q3);
+//                        }
+//                    }
+//                    if (MainActivity.q3_checkedOptionsQuantity <= 0) {
+//                        if (view.getClass().toString().contains("CheckBox")) {
+//                            MainActivity.q3 = false;
+//                        }
+//                    }
+//                    break;
+//                case 4:
+//                    if (MainActivity.q4_checkedOptionsQuantity >= 1) {
+//                        MainActivity.q4_checkedOptionsQuantity--;
+//                        if (view.getClass().toString().contains("RadioButton")) {
+//                            MainActivity.answerList_q4.remove(((RadioButton)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q4);
+//                        } else {
+//                            MainActivity.answerList_q4.remove(((CheckBox)view).getText().toString());
+//                            Log.i("TEST: ", "Tag: " + tagNumber + " contains: " + MainActivity.answerList_q4);
+//                        }
+//                    }
+//                    if (MainActivity.q4_checkedOptionsQuantity <= 0) {
+//                        if (view.getClass().toString().contains("CheckBox")) {
+//                            MainActivity.q4 = false;
+//                        }
+//                    }
+//                    break;
+//                case 5:
+//                    if (MainActivity.q5_checkedOptionsQuantity >= 1) {
+//                        MainActivity.q5_checkedOptionsQuantity--;
+//                        if (view.getClass().toString().contains("RadioButton")) {
+//                            MainActivity.answerList_q5.remove(((RadioButton)view).getText().toString());
+//                        } else {
+//                            MainActivity.answerList_q5.remove(((CheckBox)view).getText().toString());
+//                        }
+//                    }
+//                    if (MainActivity.q5_checkedOptionsQuantity <= 0) {
+//                        if (view.getClass().toString().contains("CheckBox")) {
+//                            MainActivity.q5 = false;
+//                        }
+//                    }
+//                    break;
+//                // Add more cases below as needed...
+//            }
+//        }
+//    }
 }

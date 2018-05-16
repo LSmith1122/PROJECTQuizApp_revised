@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<String> answerList_q3 = new ArrayList<String>();
     static ArrayList<String> answerList_q4 = new ArrayList<String>();
     static ArrayList<String> answerList_q5 = new ArrayList<String>();
+    static int score, answeredEditTextCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkResponse(View view) {
-        if (q1 && q2 && q3 && q4) {
-
-            // TODO: Implement a method that checks the answers of all RadioButtons and CheckBoxes
-
-            checkEditTextAnswers();
-            if (allEditTextsAnswered) {
-                
+        answeredEditTextCounter = 0;
+        int maxEditTextAmount = 0;
+        checkButtonAnswers();
+        checkEditTextAnswers();
+        for (int i = 0; i < questionList.size(); i++) {
+            if (questionList.get(i).getClass().getName().contains("Text")) {
+                maxEditTextAmount++;
             }
+        }
+        if (answeredEditTextCounter == maxEditTextAmount) {
+            allEditTextsAnswered = true;
+        }
+        if (q1 && q2 && q3 && q4 && allEditTextsAnswered) {
 
 //        if (areAllQuestionsAnswered()) {         // if all questions answered...
 //            String finalScore = String.valueOf(tallyAnswers());
@@ -93,20 +99,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void checkButtonAnswers() {
+        for (int i = 0; i < questionList.size(); i++) {
+            if (!questionList.get(i).getAnswerType().equals("Text")) { // For RadioButtons and CheckBoxes
+                Question currentQuestion = questionList.get(i);
+                if (currentQuestion.getAnswerType().contains("RadioButton")) {
+                    currentQuestion.checkAnswers(currentQuestion.getAnswerInputList().get(0));
+                }
+                if (currentQuestion.getAnswerType().contains("CheckBox")) {
+                    currentQuestion.checkAnswers(currentQuestion.getAnswerList());
+                }
+                if (currentQuestion.isAnswerCorrect()) {
+                    score++;
+                }
+            }
+        }
+    }
+
     private void checkEditTextAnswers() {
-        allEditTextsAnswered = false;
         // Add answers to an array list & list each answer within the appropriate index number - based on EditText tag number
         for (int i = 0; i < editTextArrayList.size(); i++) {
             EditText editTextObject = editTextArrayList.get(i);
             if (isEditTextAnswered(editTextObject)) {
-                allEditTextsAnswered = true;
-                int index = Integer.valueOf(editTextObject.getTag().toString()) - 1;
+                answeredEditTextCounter++;
+//                int index = Integer.valueOf(editTextObject.getTag().toString()) - 1;
                 for (Question question : questionList) {
                     question.checkAnswers(editTextObject.getText().toString());
+                    if (question.isAnswerCorrect()) {
+                        score++;
+                    }
                 }
-//                editTextAnswerList.add(index, object.getText().toString());
             } else {
-                allEditTextsAnswered = false;
                 Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
                 break;
             }
@@ -117,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         boolean status = false;
         for (int i = 0; i < booleanArrayList.size(); i++) {
             int alignedIndexNumber = Integer.valueOf(object.getTag().toString()) - 1;
-            if (!object.getText().equals("") && !object.getText().equals(null)) {
+            if (!object.getText().toString().equals("") && !object.getText().toString().equals(null)) {
                 booleanArrayList.set(alignedIndexNumber, true);
                 status = true;
                 return status;
@@ -125,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return status;
     }
+
 //    public boolean areAllQuestionsAnswered() {
 //        if (q1 && q2 && q3 && q4) {
 //            EditText textboxS = findViewById(R.id.question_5_answer_1);
