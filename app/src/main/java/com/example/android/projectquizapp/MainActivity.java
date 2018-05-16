@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     //Type of Questions to populate
     String testType;
     // Content Variables
-    static boolean q1, q2, q3, q4, q5 = false;         // determines whether or not a question has been answered
+    static boolean q1, q2, q3, q4, q5, allEditTextsAnswered = false;         // determines whether or not a question has been answered
     boolean answerCorrectQ1, answerCorrectQ2, answerCorrectQ3, answerCorrectQ4, answerCorrectQ5, answerCorrectQ5_A1, answerCorrectQ5_A2, answerCorrectQ5_A3;        // determines whether the answer chosen for its respective question is correct
     boolean areAllQuestionsAnswered = false;        // determines if all questions have been answered - not necessarily correct
     int q2_a2_stat, q2_a1_stat = 0;     // current state of whether both 'correct' options are selected for com.example.android.projectquizapp.Question 2
@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
     String q_string;        // com.example.android.projectquizapp.Question 5's TextBox text (String)
     int maxScore = 5;
 
+    static ArrayList<Question> questionList = new ArrayList<Question>();
     static ArrayList<Boolean> booleanArrayList = new ArrayList<Boolean>();
     static ArrayList<EditText> editTextArrayList = new ArrayList<EditText>();
+    static ArrayList<String> editTextAnswerList = new ArrayList<String>();
     static ArrayList<String> answerList_q1 = new ArrayList<String>();
     static ArrayList<String> answerList_q2 = new ArrayList<String>();
     static ArrayList<String> answerList_q3 = new ArrayList<String>();
@@ -50,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private final void populateActivity() {
-        ArrayList<Question> questionList = new ArrayList<Question>();
         String[] questionResourceList = getResources().getStringArray(R.array.photography_questions);
 
         Question question1 = new Question(1, questionResourceList[0], "RadioButton");
@@ -70,10 +71,16 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-
-
     public void checkResponse(View view) {
         if (q1 && q2 && q3 && q4) {
+
+            // TODO: Implement a method that checks the answers of all RadioButtons and CheckBoxes
+
+            checkEditTextAnswers();
+            if (allEditTextsAnswered) {
+                
+            }
+
 //        if (areAllQuestionsAnswered()) {         // if all questions answered...
 //            String finalScore = String.valueOf(tallyAnswers());
 //            Intent intent = new Intent(this, FinalScore_Activity.class);
@@ -82,22 +89,41 @@ public class MainActivity extends AppCompatActivity {
 //            intent.putExtras(bundle);
 //            startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(), "Please answer all questions", Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
-        }
-        for (int i = 0; i < editTextArrayList.size(); i++) {
-            EditText object = editTextArrayList.get(i);
-            checkEditTextStatus(object);
+            Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
         }
     }
 
-    private void checkEditTextStatus(EditText object) {
+    private void checkEditTextAnswers() {
+        allEditTextsAnswered = false;
+        // Add answers to an array list & list each answer within the appropriate index number - based on EditText tag number
+        for (int i = 0; i < editTextArrayList.size(); i++) {
+            EditText editTextObject = editTextArrayList.get(i);
+            if (isEditTextAnswered(editTextObject)) {
+                allEditTextsAnswered = true;
+                int index = Integer.valueOf(editTextObject.getTag().toString()) - 1;
+                for (Question question : questionList) {
+                    question.checkAnswers(editTextObject.getText().toString());
+                }
+//                editTextAnswerList.add(index, object.getText().toString());
+            } else {
+                allEditTextsAnswered = false;
+                Toast.makeText(getApplicationContext(), getString(R.string.questions_not_answered), Toast.LENGTH_SHORT).show(); // TODO: MANDATORY: DO NOT REMOVE
+                break;
+            }
+        }
+    }
+
+    private boolean isEditTextAnswered(EditText object) {
         boolean status = false;
         for (int i = 0; i < booleanArrayList.size(); i++) {
             int alignedIndexNumber = Integer.valueOf(object.getTag().toString()) - 1;
             if (!object.getText().equals("") && !object.getText().equals(null)) {
                 booleanArrayList.set(alignedIndexNumber, true);
+                status = true;
+                return status;
             }
         }
+        return status;
     }
 //    public boolean areAllQuestionsAnswered() {
 //        if (q1 && q2 && q3 && q4) {

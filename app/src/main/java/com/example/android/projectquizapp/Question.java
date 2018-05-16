@@ -8,6 +8,7 @@ public class Question {
     private int tagNumber;
     private String imageResourceID;
     private Boolean imageAvailable;
+    private Boolean answerInputStatus;
     private String questionString, answerLongString, correctAnswerLongString, answerType;
     private ArrayList<String> answerList = new ArrayList<String>();
     private ArrayList<String> correctAnswerList = new ArrayList<String>();
@@ -46,8 +47,12 @@ public class Question {
 
     public String getQuestion() { return questionString; }
 
-    public String getAnswer(int position) {
+    public String getAnswerAtIndex(int position) {
         return answerList.get(position);
+    }
+
+    public ArrayList<String> getAnswerList() {
+        return answerList;
     }
 
     public ArrayList<String> getCorrectAnswers() { return correctAnswerList; }
@@ -81,4 +86,26 @@ public class Question {
 
     public String getImageResourceID() {
         return imageResourceID; }
+
+    public void checkAnswers(String response) {
+        answerInputStatus = false;
+        if (correctAnswerLongString.equalsIgnoreCase(response)) {
+            answerInputStatus = true;
+        } else {
+            int maxAmount = correctAnswerList.size();
+            int counter = 0;
+            for (int i = 0; i < correctAnswerList.size(); i++) {
+                if (response.toLowerCase().contains(correctAnswerList.get(i).toLowerCase())) {
+                    counter++;
+                }
+            }
+            if (counter == maxAmount) {
+                answerInputStatus = true;
+            }
+        }
+    }
+
+    public boolean isAnswerCorrect() {
+        return answerInputStatus;
+    }
 }

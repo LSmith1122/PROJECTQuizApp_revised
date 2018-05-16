@@ -46,4 +46,5 @@
     <string name="correct_answer_q3">Stops</string>
     <string name="correct_answer_q4">None of the above</string>
     <string name="correct_answer_q5">Single, Lens, Reflex</string>
+    <string name="questions_not_answered">Please answer all questions</string>
 </resources>
