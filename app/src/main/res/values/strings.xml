@@ -1,50 +1,35 @@
 <resources>
-    <string-array name="photography_questions">
-        <item name="question1">Name the device that a professional digital camera has that records information - ultimately creating an image. > Mirror, Film, ISO, Sensor > Sensor</item>
-        <item name="question2">What affects the amount of light that is captured in an image? \n(select all that apply) > Shutter Speed, Aperture, Shutter Release, White Balance > Shutter Speed, Aperture</item>
-        <item name="question3">What is the term most frequently used when a photographer measures and adjusts a camera\'s light exposure? > Stops, Points > Stops</item>
-        <item name="question4">List the types of cameras in order from LEFT to RIGHT? \n(select all that apply) > DSLR/"Compact/"Compact, DSLR/"Mirrorless/"Compact, Point and Shoot/"Mirrorless/"DSLR, None of the above > None of the above</item>
-        <item name="question5">What does the \"SLR\" stand for in DSLR? > null > single lens reflex</item>
-        <!--<string name="question5">What does the \"SLR\" stand for in DSLR?</string>-->
-    </string-array>
     <string name="app_name">PROJECT: Quiz App</string>
     <string name="introduction_welcome">Welcome to the \nQuiz App!</string>
     <string name="introduction_about_quiz">In this quiz, you will be tested on your knowledge on photography basics. \nClick the \"Start Quiz\" button below to begin. \nGood luck!</string>
     <!--I'm so glad that I took notes on "Escape Characters" on my whiteboard next to me!-->
     <string name="instructions">Read and answer each question. When finished, click the \"Submit\" button to check your score.</string>
-    <string name="question_1">Name the device that a professional digital camera has that records information - ultimately creating an image.</string>
-    <string name="question_1_1">Mirror</string>
-    <string name="question_1_2">Film</string>
-    <string name="question_1_3">ISO</string>
-    <string name="question_1_4">Sensor</string>
-    <string name="question_1_answerlist">Mirror, Film, ISO, Sensor</string>
-    <string name="question_2">What affects the amount of light that is captured in an image? \n(select all that apply)</string>
-    <string name="question_2_1">Shutter Speed</string>
-    <string name="question_2_2">Aperture</string>
-    <string name="question_2_3">Shutter Release</string>
-    <string name="question_2_4">White Balance</string>
-    <string name="question_2_answerlist">Shutter Speed, Aperture, Shutter Release, White Balance</string>
-    <string name="question_3">What is the term most frequently used when a photographer measures and adjusts a camera\'s light exposure?</string>
-    <string name="question_3_1">Stops</string>
-    <string name="question_3_2">Points</string>
-    <string name="question_3_answerlist">Stops, Points</string>
-    <string name="question_4">List the types of cameras in order from LEFT to RIGHT? \n(select all that apply)</string>
-    <string name="question_4_1">DSLR/"Compact/"Compact</string>
-    <string name="question_4_2">DSLR/"Mirrorless/"Compact</string>
-    <string name="question_4_3">Point and Shoot/"Mirrorless/"DSLR</string>
-    <string name="question_4_4">None of the above</string>
-    <string name="question_4_answerlist">DSLR/"Compact/"Compact, DSLR/"Mirrorless/"Compact, Point and Shoot/"Mirrorless/"DSLR, None of the above</string>
-    <string name="question_5">What does the \"SLR\" stand for in DSLR?</string>
-    <string name="question_5_1">Type your answer here...</string>
-    <string name="question_5_1_1">S:</string>
-    <string name="question_5_2_1">L:</string>
-    <string name="question_5_3_1">R:</string>
-    <string name="allowed_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
+    <string name="allowed_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
     <string name="final_score_response">Congratulations on completing the Quiz! \n\nYour Final Score:</string>
-    <string name="correct_answer_q1">Sensor</string>
-    <string name="correct_answer_q2">Shutter Speed, Aperture</string>
-    <string name="correct_answer_q3">Stops</string>
-    <string name="correct_answer_q4">None of the above</string>
-    <string name="correct_answer_q5">Single, Lens, Reflex</string>
     <string name="questions_not_answered">Please answer all questions</string>
+    <string name="text_hint">Type your text here...</string>
+    <!--Add more questions in the list below...
+    ***
+    ***
+    The order of operation to assure your questions will work properly are as followed: (pay attention to the spacing and special characters as well)
+    ***
+    Answer Selection Type ~ Question >  Answer Button Options > Correct Answers ~ Image Resource Name (if applicable)
+    ***
+    ***
+    Description:
+    ***
+    Answer Selection Type: Possible String input [RadioButton, CheckBox, Text] - pay attention to capitalization / RadioButton should be used when only 1 answer is accepted
+    Question: Insert question here
+    Answer Button Options: Text for Answer Button Options separated by commas and a space ", "  (insert "null" if Answer Selection Type is "Text")
+    Correct Answers: Separated by commas and a space ", "
+    Image Resource Name: should be the name of the image resource file provided in drawables folder - capitalization of letters
+    -->
+    <string-array name="photography_questions">
+        <item name="question1">RadioButton ~ Name the device that a professional digital camera has that records information - ultimately creating an image. > Mirror, Film, ISO, Sensor > Sensor</item>
+        <item name="question2">CheckBox ~ What affects the amount of light that is captured in an image? \n(select all that apply) > Shutter Speed, Aperture, Shutter Release, White Balance > Shutter Speed, Aperture</item>
+        <item name="question3">RadioButton ~ What is the term most frequently used when a photographer measures and adjusts a camera\'s light exposure? > Stops, Points > Stops</item>
+        <item name="question4">CheckBox ~ List the types of cameras in order from LEFT to RIGHT? \n(select all that apply) > DSLR/"Compact/"Compact, DSLR/"Mirrorless/"Compact, Point and Shoot/"Mirrorless/"DSLR, None of the above > None of the above ~ cameras</item>
+        <item name="question5">Text ~ What does the \"SLR\" stand for in DSLR? > null > single lens reflex</item>
+        <item name="question0">RadioButton ~ Soft focus photos refer to the edges being clearly defined. > True, False > False</item>
+    </string-array>
 </resources>
