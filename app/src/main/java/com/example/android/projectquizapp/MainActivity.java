@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
             String[] rawString = questionResourceList[i].split(" ~ ");
             String answerSelectionType = rawString[0];
             String questionString = rawString[1];
+            int tag = i + 1;
             if (rawString.length >= 3) {
                 String img = rawString[2];
-                Question question = new Question(i + 1, questionString, answerSelectionType, img);
+                Question question = new Question(tag, questionString, answerSelectionType, img);
                 questionList.add(question);
             } else {
-                Question question = new Question(i + 1, questionString, answerSelectionType);
+                Question question = new Question(tag, questionString, answerSelectionType);
                 questionList.add(question);
             }
         }
@@ -47,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
         int counter = 0;
         for (int i = 0; i < questionList.size(); i++) {
             Question question = questionList.get(i);
-            if (question.getAnswerInputList().size() > 0) {
+            if (question.isQuestionAnswered()) {
                 counter++;
             } else {
-                questionsNotAnswered();
                 break;
             }
         }
@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
                 Question currentQuestion = questionList.get(i);
                 if (currentQuestion.getAnswerType().contains("RadioButton")) {
                     if (currentQuestion.getAnswerInputList().size() > 0) {
-                        currentQuestion.checkAnswers(currentQuestion.getAnswerInputList());
+                        currentQuestion.checkAnswers();
                     }
                 }
                 if (currentQuestion.getAnswerType().contains("CheckBox")) {
-                    currentQuestion.checkAnswers(currentQuestion.getAnswerList());
+                    currentQuestion.checkAnswers();
                 }
             }
         }

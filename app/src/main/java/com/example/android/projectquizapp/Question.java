@@ -1,13 +1,12 @@
 package com.example.android.projectquizapp;
 import android.util.Log;
-
 import java.util.ArrayList;
 public class Question {
     private int tagNumber;
     private String imageResourceID;
     private Boolean imageAvailable;
     private Boolean questionAnsweredStatus;
-    private Boolean answerInputStatus;
+    private Boolean answerCorrect;
     private int checkedOptionsQuantity;
     private String questionString, answerLongString, correctAnswerLongString, answerType;
     private ArrayList<String> answerList = new ArrayList<String>();
@@ -20,7 +19,7 @@ public class Question {
         answerType = answerSelectionType;
         imageAvailable = false;
         checkedOptionsQuantity = 0;
-        answerInputStatus = false;
+        answerCorrect = false;
         compileStrings(questionStringList);
         String[] correctAnswerSimpleList = correctAnswerLongString.split(", ");
         for (String stringNuggets : correctAnswerSimpleList) {
@@ -33,7 +32,7 @@ public class Question {
         imageAvailable = true;
         imageResourceID = imageResourcePath;
         checkedOptionsQuantity = 0;
-        answerInputStatus = false;
+        answerCorrect = false;
         compileStrings(questionStringList);
         String[] correctAnswerSimpleList = correctAnswerLongString.split(", ");
         for (String stringNuggets : correctAnswerSimpleList) {
@@ -73,7 +72,7 @@ public class Question {
     public String getImageResourceID() {
         return imageResourceID; }
     public void checkAnswers(String response) {     // For EditText Questions only
-        answerInputStatus = false;
+        answerCorrect = false;
         wrongAnswerCount = 0;
         for (int i = 0; i < response.length(); i++) {
             if (response.endsWith(" ")) {
@@ -81,34 +80,16 @@ public class Question {
             }
         }
         if (correctAnswerLongString.equalsIgnoreCase(response)) {
-            answerInputStatus = true;
+            answerCorrect = true;
         } else {
-            answerInputStatus = false;
+            answerCorrect = false;
         }
-//        } else {
-//            int maxAmount = correctAnswerList.size();
-//            int counter = 0;
-//            for (int i = 0; i < correctAnswerList.size(); i++) {
-//                if (correctAnswerList.get(i).toLowerCase().contains(response.toLowerCase())) {
-//                    counter++;
-//                } else {
-//                }
-//            }
-//            if (counter == maxAmount) {
-//                answerInputStatus = true;
-//            } else {
-//                wrongAnswerCount++;
-//            }
-//        }
-//        if (wrongAnswerCount > 0) {
-//            answerInputStatus = false;
-//        }
     }
-    public void checkAnswers(ArrayList<String> responseList) {      // For RadioButton and CheckBox Questions
-        answerInputStatus = false;
+    public void checkAnswers() {      // For RadioButton and CheckBox Questions
+        answerCorrect = false;
+        wrongAnswerCount = 0;
         int counter = 0;
         int maxCounter = getCorrectAnswers().size();
-        wrongAnswerCount = 0;
         for (int a = 0; a < getAnswerInputList().size(); a++) {
             if (getCorrectAnswers().contains(getAnswerInputList().get(a))) {
                 counter++;
@@ -116,20 +97,30 @@ public class Question {
                 wrongAnswerCount++;
             }
         }
-        if (counter == maxCounter) {
-            answerInputStatus = true;
-        } else {
-            if (wrongAnswerCount > 0) {
-                answerInputStatus = false;
+        if (getAnswerType().contains("RadioButton")) {
+            if (counter == maxCounter && wrongAnswerCount <= 0) {
+                answerCorrect = true;
+            } else {
+                answerCorrect = false;
+            }
+        }
+        if (getAnswerType().contains("CheckBox")) {
+            if (wrongAnswerCount <= 0) {
+                answerCorrect = true;
+            } else {
+                answerCorrect = false;
             }
         }
     }
-    public boolean isAnswerCorrect() { return answerInputStatus; }
+    public boolean isAnswerCorrect() { return answerCorrect; }
     public void questionAnswered(Boolean status) { questionAnsweredStatus = status; }   // For EditText Questions only
     public Boolean isQuestionAnswered() {
         boolean status = false;
         if (getAnswerInputList().size() > 0) {
             status = true;
+        } else {
+            status = false;
+            Log.i("TEST", "Question " + getTag() + " is not answered. Input: " + getAnswerInputList());
         }
         return status;
     }

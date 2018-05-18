@@ -118,7 +118,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             textBox.setTag(tag);
             MainActivity.editTextArrayList.add(textBox);
         }
-            return listItemView;
+        return listItemView;
     }
     @Override
     public void onClick (View view){
