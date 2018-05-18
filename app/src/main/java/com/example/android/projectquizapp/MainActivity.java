@@ -1,6 +1,8 @@
 package com.example.android.projectquizapp;
 
 // App was created by Lloyd Robert Smith
+//
+// GitHub: LSmith1122
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

@@ -2,7 +2,6 @@
     <string name="app_name">PROJECT: Quiz App</string>
     <string name="introduction_welcome">Welcome to the \nQuiz App!</string>
     <string name="introduction_about_quiz">In this quiz, you will be tested on your knowledge on photography basics. \nClick the \"Start Quiz\" button below to begin. \nGood luck!</string>
-    <!--I'm so glad that I took notes on "Escape Characters" on my whiteboard next to me!-->
     <string name="instructions">Read and answer each question. When finished, click the \"Submit\" button to check your score.</string>
     <string name="allowed_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
     <string name="final_score_response">Congratulations on completing the Quiz! \n\nYour Final Score:</string>

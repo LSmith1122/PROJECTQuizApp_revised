@@ -112,7 +112,6 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         if (currentQuestionLayout.getAnswerType().equals("Text")) {
             ((LinearLayout) listItemView.findViewById(R.id.checkbox_group)).setVisibility(View.GONE);
             ((RadioGroup) listItemView.findViewById(R.id.radio_group)).setVisibility(View.GONE);
-
             EditText textBox = (EditText) listItemView.findViewById(R.id.textbox);
             textBox.setVisibility(View.VISIBLE);
             textBox.setTag(tag);

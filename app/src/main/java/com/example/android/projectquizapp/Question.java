@@ -13,7 +13,6 @@ public class Question {
     private ArrayList<String> answerInputList = new ArrayList<String>();
     private ArrayList<String> correctAnswerList = new ArrayList<String>();
     private int wrongAnswerCount = 0;
-
     Question(int tag, String questionStringList, String answerSelectionType) {
         tagNumber = tag;
         answerType = answerSelectionType;
