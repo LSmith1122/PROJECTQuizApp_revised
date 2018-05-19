@@ -2,16 +2,16 @@ package com.example.android.projectquizapp;
 
 // App was created by Lloyd Robert Smith
 //
-// GitHub: LSmith1122
+// GitHub: LSmith1122/PROJECTQuizApp_revised
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     static ArrayList<Question> questionList = new ArrayList<Question>();
@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 currentScore++;
             }
         }
-        return currentScore / maxScore * 100;
+        double num = currentScore / maxScore * 100.0;
+        DecimalFormat dec = new DecimalFormat(".##");       // Retrieved code snippet from https://www.mkyong.com/java/java-display-double-in-2-decimal-points/
+        return Double.valueOf(dec.format(num));
     }
     private void checkButtonAnswers() {
         for (int i = 0; i < questionList.size(); i++) {

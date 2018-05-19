@@ -119,7 +119,6 @@ public class Question {
             status = true;
         } else {
             status = false;
-            Log.i("TEST", "Question " + getTag() + " is not answered. Input: " + getAnswerInputList());
         }
         return status;
     }
