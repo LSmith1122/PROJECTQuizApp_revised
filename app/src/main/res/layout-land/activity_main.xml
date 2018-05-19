@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context="com.example.android.projectquizapp.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/instructions"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+    <!-- MAIN CONTENT -->
+    <LinearLayout
+        android:id="@+id/parent_group_background_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_below="@id/info_text"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical">
+        <!-- Parent Group for com.example.android.projectquizapp.Question Groups -->
+        <ListView
+            android:id="@+id/parent_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!-- SUBMIT BUTTON -->
+    <RelativeLayout
+        android:id="@+id/bottom_section_parent_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parent_group_background_group"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp">
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:onClick="checkResponse"
+            android:text="Submit"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</LinearLayout>
